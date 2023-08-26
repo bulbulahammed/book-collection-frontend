@@ -47,15 +47,20 @@ export default function Navbar() {
               <li>
                 {email ? <span>{email}</span> : <a>Account</a>}
                 <ul className="p-2">
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                  <li>
-                    <span onClick={handleLogout}>Logout</span>
-                  </li>
-                  <li>
-                    <Link to="/signup">Sign Up</Link>
-                  </li>
+                  {email ? (
+                    <li>
+                      <span onClick={handleLogout}>Logout</span>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link to="/signup">Sign Up</Link>
+                      </li>
+                      <li>
+                        <Link to="/login">Login</Link>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </li>
             </ul>
@@ -83,15 +88,20 @@ export default function Navbar() {
                   <summary>Account</summary>
                 )}
                 <ul className="p-2">
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                  <li>
-                    <span onClick={handleLogout}>Logout</span>
-                  </li>
-                  <li>
-                    <Link to="/signup">Sign Up</Link>
-                  </li>
+                  {email ? (
+                    <li>
+                      <span onClick={handleLogout}>Logout</span>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link to="/signup">Sign Up</Link>
+                      </li>
+                      <li>
+                        <Link to="/login">Login</Link>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </details>
             </li>
