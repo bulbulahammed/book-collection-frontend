@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { defaultState } from "../redux/feature/user/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 export default function Navbar() {
+  const { email } = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(defaultState());
+    localStorage.removeItem("token");
+  };
+
   return (
     <>
       <div className="navbar backdrop-blur-lg">
@@ -36,10 +45,13 @@ export default function Navbar() {
                 <Link to="/recentBooks">Recent Books</Link>
               </li>
               <li>
-                <a>Account</a>
+                {email ? <span>{email}</span> : <a>Account</a>}
                 <ul className="p-2">
                   <li>
                     <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <span onClick={handleLogout}>Logout</span>
                   </li>
                   <li>
                     <Link to="/signup">Sign Up</Link>
@@ -65,10 +77,17 @@ export default function Navbar() {
             </li>
             <li tabIndex={0}>
               <details>
-                <summary>Account</summary>
+                {email ? (
+                  <summary>{email}</summary>
+                ) : (
+                  <summary>Account</summary>
+                )}
                 <ul className="p-2">
                   <li>
                     <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <span onClick={handleLogout}>Logout</span>
                   </li>
                   <li>
                     <Link to="/signup">Sign Up</Link>

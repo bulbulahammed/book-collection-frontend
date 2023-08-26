@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./feature/user/userSlice";
-import logger from "./middlewares/loggers";
+import { api } from "./api/apiSlice";
+import authReducer from "./feature/user/authSlice";
 
 const store = configureStore({
   reducer: {
-    user: userSlice,
+    auth: authReducer,
+    [api.reducerPath]: api.reducer,
   },
   // To prevent Overwrite middleware
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
