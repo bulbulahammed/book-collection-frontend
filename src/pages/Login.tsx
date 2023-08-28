@@ -10,13 +10,8 @@ import { useAppDispatch } from "../redux/hook";
 export default function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [signinUser, { data, isLoading, error, isError, isSuccess }] =
+  const [signinUser, { data, error, isLoading, isError, isSuccess }] =
     useSigninUserMutation();
-
-  console.log(error, isSuccess);
-  if (isError) {
-    toast("There is an Error");
-  }
 
   if (isSuccess) {
     dispatch(
@@ -29,7 +24,14 @@ export default function Login() {
     );
     localStorage.setItem("token", data.data.token);
     navigate("/");
+    toast.success("Login Successfully ✌", { toastId: "LoginSuccess" });
   }
+
+  if (isError) {
+    toast.error("Login Failed!", { toastId: "LoginError" });
+  }
+
+  console.log(error);
 
   const [formData, setFormData] = useState({
     user: {
@@ -53,7 +55,6 @@ export default function Login() {
     e.preventDefault();
     signinUser(formData);
   };
-
   return (
     <section className="">
       <div className="bg-grey-lighter min-h-screen flex flex-col">
@@ -85,14 +86,17 @@ export default function Login() {
                 onChange={handleChange}
                 placeholder="examplePassword123"
               />
-              <button
-                type="submit"
-                className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1"
-              >
-                Login
-              </button>
-              {isLoading && (
-                <span className="loading loading-spinner text-success"></span>
+              {isLoading ? (
+                <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
+                  <span className="loading loading-spinner text-info"></span>
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1"
+                >
+                  Login
+                </button>
               )}
             </form>
             <p className="text-xs">

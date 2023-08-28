@@ -1,10 +1,23 @@
 import React, { FormEvent, useState } from "react";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useSignupUserMutation } from "../redux/feature/user/userApiSlice";
 export default function Signup() {
-  const [signupUser, { data, isLoading }] = useSignupUserMutation();
+  const navigate = useNavigate();
+  const [signupUser, { data, isLoading, isSuccess, isError }] =
+    useSignupUserMutation();
 
-  console.log(data, isLoading);
+  const successToast = data?.message;
+
+  if (isSuccess) {
+    toast.success(successToast, { toastId: "SignUpSuccess" });
+    navigate("/login");
+  }
+
+  if (isError) {
+    toast.error("Sign Up Failed!", { toastId: "SignUpError" });
+  }
 
   const [formData, setFormData] = useState({
     user: {
@@ -28,7 +41,6 @@ export default function Signup() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
     signupUser(formData);
   };
   return (
@@ -84,14 +96,17 @@ export default function Signup() {
                 onChange={handleChange}
                 placeholder="examplePassword123"
               />
-              <button
-                type="submit"
-                className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1"
-              >
-                Sign Up
-              </button>
-              {isLoading && (
-                <span className="loading loading-spinner text-success"></span>
+              {isLoading ? (
+                <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
+                  <span className="loading loading-spinner text-info"></span>
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1"
+                >
+                  SignUp
+                </button>
               )}
             </form>
             <p className="text-xs">
