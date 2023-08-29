@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 export interface IAuthState {
   token: string | null;
   user: {
@@ -8,10 +7,13 @@ export interface IAuthState {
   };
 }
 
+const storedToken = localStorage.getItem("token");
+const storedEmail = localStorage.getItem("email");
+
 const initialState: IAuthState = {
-  token: null,
+  token: storedToken !== null ? storedToken : null,
   user: {
-    email: null,
+    email: storedEmail !== null ? storedEmail : null,
   },
 };
 

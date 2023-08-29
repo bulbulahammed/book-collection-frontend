@@ -2,9 +2,9 @@ export default function Footer() {
   return (
     <div>
       <footer
-        className="footer footer-center p-4 bg-base-300 text-base-content"
+        className="footer footer-center p-4 text-base-content"
         style={{
-          fontFamily: "'Kalam', cursive",
+          backgroundColor: "rgba(150, 150, 150, 0.1)",
         }}
       >
         <div>

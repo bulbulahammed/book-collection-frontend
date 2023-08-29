@@ -8,6 +8,7 @@ export default function Navbar() {
   const handleLogout = () => {
     dispatch(defaultState());
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
   };
 
   return (
@@ -15,8 +16,7 @@ export default function Navbar() {
       <div
         className="navbar sticky"
         style={{
-          backgroundColor: "rgba(0, 0, 0, 0.1)",
-          fontFamily: "'Kalam', cursive",
+          backgroundColor: "rgba(150, 150, 150, 0.1)",
         }}
       >
         <div className="navbar-start">
