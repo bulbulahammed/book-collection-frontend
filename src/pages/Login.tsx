@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,28 +10,26 @@ import { useAppDispatch } from "../redux/hook";
 export default function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [signinUser, { data, error, isLoading, isError, isSuccess }] =
+  const [signinUser, { data, isLoading, isError, isSuccess }] =
     useSigninUserMutation();
 
-  if (isSuccess) {
-    dispatch(
-      setUser({
-        token: data.data.token,
-        user: {
-          email: data.data.user.email,
-        },
-      })
-    );
-    localStorage.setItem("token", data.data.token);
-    navigate("/");
-    toast.success("Login Successfully ✌", { toastId: "LoginSuccess" });
-  }
-
-  if (isError) {
-    toast.error("Login Failed!", { toastId: "LoginError" });
-  }
-
-  console.log(error);
+  useEffect(() => {
+    if (isSuccess && data) {
+      dispatch(
+        setUser({
+          token: data.data.token,
+          user: {
+            email: data.data.user.email,
+          },
+        })
+      );
+      localStorage.setItem("token", data.data.token);
+      navigate("/");
+      toast.success("Login Successfully ✌", { toastId: "LoginSuccess" });
+    } else if (isError) {
+      toast.error("Login Failed!", { toastId: "LoginError" });
+    }
+  }, [isSuccess, isError, data, dispatch, navigate]);
 
   const [formData, setFormData] = useState({
     user: {

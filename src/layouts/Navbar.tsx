@@ -51,7 +51,7 @@ export default function Navbar() {
                 <Link to="/recentBooks">Recent Books</Link>
               </li>
               <li>
-                {email ? <span>{email}</span> : <a>Account</a>}
+                {email ? <span>{email}</span> : <p>Account</p>}
                 <ul className="p-2">
                   {email ? (
                     <li>
@@ -71,8 +71,8 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <Link to="/">
-            <a className="normal-case text-xl">Books</a>
+          <Link to="/" className="normal-case text-xl">
+            Books
           </Link>
         </div>
         <div className="navbar-end hidden lg:flex">
