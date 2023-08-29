@@ -12,7 +12,13 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar backdrop-blur-lg">
+      <div
+        className="navbar sticky"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          fontFamily: "'Kalam', cursive",
+        }}
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
