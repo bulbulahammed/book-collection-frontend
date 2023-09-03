@@ -1,14 +1,57 @@
+import { toast } from "react-toastify";
+import { useGetLatestBooksQuery } from "../../redux/feature/books/bookApi";
+import { IBook } from "../../types/globaltypes";
+import BookCard from "../ui/BookCard";
+
 export default function LatestBooks() {
+  const { data, isError, isSuccess, isLoading } =
+    useGetLatestBooksQuery(undefined);
+
+  const booksData = data?.data;
+
+  console.log(booksData);
+
+  if (isError) {
+    toast("Books Can't Load 😟", { toastId: "latestBooksLoadingError" });
+  }
+  if (isSuccess) {
+    toast("Books Successfully Loaded ✌", { toastId: "latestBooksLoaded" });
+  }
   return (
     <div
+      className="px-10"
       style={{
         background: "rgba(255, 194, 139, 0.30)",
         fontFamily: "'Kalam', cursive",
       }}
     >
+      {/* Header Section */}
       <div className="text-center py-10">
         <h3 className="text-4xl">Latest Books</h3>
         <h5 className="text-2xl">Added By Users</h5>
+      </div>
+      {/* Books Card */}
+      <div>
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <span className="loading loading-ring loading-lg"></span>
+          </div>
+        ) : isError ? (
+          <div className="flex items-center justify-center text-red-600">
+            <p
+              style={{
+                fontFamily: "'Allerta', sans-serif",
+              }}
+            >
+              An error occurred while fetching data
+            </p>
+          </div>
+        ) : (
+          <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
+            {isSuccess &&
+              booksData?.map((book: IBook) => <BookCard book={book} />)}
+          </div>
+        )}
       </div>
     </div>
   );
