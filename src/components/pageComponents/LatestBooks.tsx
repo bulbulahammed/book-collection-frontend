@@ -9,8 +9,6 @@ export default function LatestBooks() {
 
   const booksData = data?.data;
 
-  console.log(booksData);
-
   if (isError) {
     toast("Books Can't Load 😟", { toastId: "latestBooksLoadingError" });
   }
@@ -49,7 +47,9 @@ export default function LatestBooks() {
         ) : (
           <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
             {isSuccess &&
-              booksData?.map((book: IBook) => <BookCard book={book} />)}
+              booksData?.map((book: IBook) => (
+                <BookCard key={book.id} book={book} />
+              ))}
           </div>
         )}
       </div>

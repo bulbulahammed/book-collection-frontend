@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api/apiSlice";
-import authReducer from "./feature/user/authSlice";
+import authSlice from "./feature/user/authSlice";
 
 const store = configureStore({
   reducer: {
-    auth: authReducer,
+    auth: authSlice,
     [api.reducerPath]: api.reducer,
   },
   // To prevent Overwrite middleware
