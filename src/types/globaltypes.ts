@@ -32,8 +32,9 @@ export type IBook = {
   genre: string;
   publicationYear: string;
   img: string;
-  user?: string;
+  addedBy?: string;
   status: IBookStatus;
   reviews?: IBookReviews;
   id?: string;
+  description: string;
 };

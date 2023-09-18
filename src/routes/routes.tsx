@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import AddBook from "../pages/AddBook";
 import AllBooks from "../pages/AllBooks";
 import BookDetails from "../pages/BookDetails";
 import EditBook from "../pages/EditBook";
@@ -7,6 +8,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import RecentBooks from "../pages/RecentBooks";
 import Signup from "../pages/Signup";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/addBook",
+        element: (
+          <PrivateRoutes>
+            <AddBook />,
+          </PrivateRoutes>
+        ),
       },
     ],
   },
