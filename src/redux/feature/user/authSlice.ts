@@ -5,6 +5,9 @@ export interface IAuthState {
   user: {
     email: string | null;
   };
+  isLoading: boolean;
+  isError: boolean;
+  error: string | null;
 }
 
 const storedToken = localStorage.getItem("token");
@@ -15,6 +18,9 @@ const initialState: IAuthState = {
   user: {
     email: storedEmail !== null ? storedEmail : null,
   },
+  isLoading: false,
+  isError: false,
+  error: null,
 };
 
 export const authSlice = createSlice({

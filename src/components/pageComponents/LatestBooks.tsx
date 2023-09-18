@@ -12,9 +12,6 @@ export default function LatestBooks() {
   if (isError) {
     toast("Books Can't Load 😟", { toastId: "latestBooksLoadingError" });
   }
-  if (isSuccess) {
-    toast("Books Successfully Loaded ✌", { toastId: "latestBooksLoaded" });
-  }
   return (
     <div
       className="px-10"

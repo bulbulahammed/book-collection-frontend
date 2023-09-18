@@ -50,6 +50,11 @@ export default function Navbar() {
               <li>
                 <Link to="/recentBooks">Recent Books</Link>
               </li>
+              {email && (
+                <li>
+                  <Link to="addBook">Add Book</Link>
+                </li>
+              )}
               <li>
                 {email ? <span>{email}</span> : <p>Account</p>}
                 <ul className="p-2">
@@ -86,6 +91,11 @@ export default function Navbar() {
             <li>
               <Link to="/recentBooks">Recent Books</Link>
             </li>
+            {email && (
+              <li>
+                <Link to="addBook">Add Book</Link>
+              </li>
+            )}
             <li tabIndex={0}>
               <details>
                 {email ? (
