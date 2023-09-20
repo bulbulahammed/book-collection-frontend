@@ -176,12 +176,6 @@ export default function EditBook() {
                 </button>
               )}
             </form>
-
-            {isUpdating && (
-              <div className="text-center">
-                <span className="loading loading-spinner text-info"></span>
-              </div>
-            )}
           </div>
         </div>
       </div>
