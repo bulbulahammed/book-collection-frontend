@@ -42,8 +42,6 @@ export default function AddBook() {
     addBook(formData);
   };
 
-  console.log("Data After AddBook", data);
-
   const ToastMessage = data?.message;
 
   useEffect(() => {
@@ -51,7 +49,6 @@ export default function AddBook() {
       toast.success(ToastMessage, { toastId: "AddBookSuccess" });
       navigate("/");
     }
-
     if (isError) {
       toast.error(ToastMessage, { toastId: "AddBookError" });
     }
@@ -155,7 +152,7 @@ export default function AddBook() {
                     className="w-20 h-20"
                   />
                 ) : (
-                  <p></p>
+                  <p>Select One</p>
                 )}
               </div>
 
