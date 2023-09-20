@@ -1,17 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect } from "react";
 import { BiCategory } from "react-icons/bi";
 import { BsPen } from "react-icons/bs";
 import { GrStatusGood } from "react-icons/gr";
 import { LuEdit } from "react-icons/lu";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { SlCalender } from "react-icons/sl";
-import { Link, useParams } from "react-router-dom";
-import { useGetSingleBooksQuery } from "../redux/feature/books/bookApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+  useDeleteBookMutation,
+  useGetSingleBooksQuery,
+} from "../redux/feature/books/bookApi";
 
 export default function BookDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data, isLoading, isError, isSuccess } = useGetSingleBooksQuery(id);
   const bookData = data?.data;
+
+  const [
+    deleteBook,
+    { isLoading: Deleting, isError: DeleteError, isSuccess: Deleted },
+  ] = useDeleteBookMutation();
+
+  useEffect(() => {
+    if (Deleted) {
+      toast.success("Successfully Deleted", { toastId: "successDelete" });
+      navigate("/");
+    }
+    if (DeleteError) {
+      toast.error("Failed to delete", { toastId: "deleteError" });
+    }
+  }, [Deleted, DeleteError, navigate]);
+
+  const handleDelete = () => {
+    deleteBook(id);
+  };
 
   return (
     <>
@@ -78,14 +103,22 @@ export default function BookDetails() {
                 </Link>
               </div>
               {/* Delete Button */}
-              <div className="ml-4">
-                <div className="text-red-600 flex items-center">
-                  <div>
-                    <RiDeleteBin5Line />
+              {Deleting ? (
+                <span className="loading loading-ring loading-lg"></span>
+              ) : (
+                <div
+                  className="ml-4"
+                  onClick={handleDelete}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="text-red-600 flex items-center">
+                    <div>
+                      <RiDeleteBin5Line />
+                    </div>
+                    <div>Delete</div>
                   </div>
-                  <div>Delete</div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

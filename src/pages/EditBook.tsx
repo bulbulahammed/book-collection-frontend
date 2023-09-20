@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FormEvent, useEffect, useState } from "react";
+import FileBase from "react-file-base64";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -15,6 +16,8 @@ export default function EditBook() {
     author: "",
     genre: "",
     publicationYear: "",
+    description: "",
+    img: "",
   });
 
   const [
@@ -39,8 +42,10 @@ export default function EditBook() {
     toast.error("Update Failed!", { toastId: "BookUpdateError" });
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await editBook({ id, ...formData });
@@ -104,6 +109,41 @@ export default function EditBook() {
                 value={formData.publicationYear}
                 onChange={handleChange}
               />
+
+              {/*----------- Label For  Description ------------*/}
+              <label className="label">
+                <span className="label-text text-sm">Description</span>
+              </label>
+              <textarea
+                className="input input-bordered w-full max-w-xs"
+                name="description"
+                placeholder="Description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+              {/*----------- Label For  Image ------------*/}
+              <label className="label">
+                <span className="label-text text-sm">Image</span>
+              </label>
+              <div className="flex items-center space-x-4">
+                <FileBase
+                  type="file"
+                  multiple={false}
+                  onDone={({ base64 }: { base64: string }) => {
+                    setFormData({
+                      ...formData,
+                      img: base64,
+                    });
+                  }}
+                />
+
+                {formData?.img ? (
+                  <img src={formData?.img} alt="img" className="w-20 h-20" />
+                ) : (
+                  <p>Update Image</p>
+                )}
+              </div>
+
               {isUpdating ? (
                 <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
                   <span className="loading loading-spinner text-info"></span>
