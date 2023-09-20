@@ -27,6 +27,12 @@ export default function EditBook() {
 
   const { data: singleBook, isLoading, isError } = useGetSingleBooksQuery(id);
 
+  useEffect(() => {
+    if (isError) {
+      toast.error("Error on data loading", { toastId: "editLoadError" });
+    }
+  }, [isError]);
+
   const editableBook = singleBook?.data;
 
   useEffect(() => {
@@ -69,7 +75,9 @@ export default function EditBook() {
                 type="text"
                 className="input input-bordered w-full max-w-xs"
                 name="title"
-                placeholder={editableBook?.title}
+                placeholder={
+                  isLoading ? "Loading........" : editableBook?.title || ""
+                }
                 value={formData.title}
                 onChange={handleChange}
               />
@@ -81,7 +89,9 @@ export default function EditBook() {
                 type="text"
                 className="input input-bordered w-full max-w-xs"
                 name="author"
-                placeholder={editableBook?.author}
+                placeholder={
+                  isLoading ? "Loading........" : editableBook?.author || ""
+                }
                 value={formData.author}
                 onChange={handleChange}
               />
@@ -93,7 +103,9 @@ export default function EditBook() {
                 type="text"
                 className="input input-bordered w-full max-w-xs"
                 name="genre"
-                placeholder={editableBook?.genre}
+                placeholder={
+                  isLoading ? "Loading........" : editableBook?.genre || ""
+                }
                 value={formData.genre}
                 onChange={handleChange}
               />
@@ -105,7 +117,11 @@ export default function EditBook() {
                 type="text"
                 className="input input-bordered w-full max-w-xs"
                 name="publicationYear"
-                placeholder={editableBook?.publicationYear}
+                placeholder={
+                  isLoading
+                    ? "Loading........"
+                    : editableBook?.publicationYear || ""
+                }
                 value={formData.publicationYear}
                 onChange={handleChange}
               />
@@ -117,7 +133,11 @@ export default function EditBook() {
               <textarea
                 className="input input-bordered w-full max-w-xs"
                 name="description"
-                placeholder="Description"
+                placeholder={
+                  isLoading
+                    ? "Loading........"
+                    : editableBook?.description || ""
+                }
                 value={formData.description}
                 onChange={handleChange}
               />
@@ -136,7 +156,6 @@ export default function EditBook() {
                     });
                   }}
                 />
-
                 {formData?.img ? (
                   <img src={formData?.img} alt="img" className="w-20 h-20" />
                 ) : (

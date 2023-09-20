@@ -152,7 +152,7 @@ export default function AddBook() {
                     className="w-20 h-20"
                   />
                 ) : (
-                  <p>Select One</p>
+                  <p>Select</p>
                 )}
               </div>
 
