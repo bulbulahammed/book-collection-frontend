@@ -165,7 +165,7 @@ export default function EditBook() {
 
               {isUpdating ? (
                 <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
-                  <span className="loading loading-spinner text-info"></span>
+                  <span className="loading loading-ring loading-lg"></span>
                 </button>
               ) : (
                 <button

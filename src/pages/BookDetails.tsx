@@ -12,12 +12,15 @@ import {
   useDeleteBookMutation,
   useGetSingleBooksQuery,
 } from "../redux/feature/books/bookApi";
+import { useAppSelector } from "../redux/hook";
 
 export default function BookDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, isError, isSuccess } = useGetSingleBooksQuery(id);
   const bookData = data?.data;
+
+  const { email } = useAppSelector((state) => state.auth.user);
 
   const [
     deleteBook,
@@ -35,94 +38,130 @@ export default function BookDetails() {
   }, [Deleted, DeleteError, navigate]);
 
   const handleDelete = () => {
-    deleteBook(id);
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (confirmDelete) {
+      deleteBook(id);
+    }
   };
 
   return (
-    <>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
-          <img
-            src={bookData?.img}
-            className="max-w-sm rounded-lg shadow-2xl"
-            alt="Book"
-          />
+    <section className="text-center hero min-h-screen bg-base-200">
+      {isLoading ? (
+        <span className="loading loading-ring loading-lg"></span>
+      ) : (
+        isSuccess && (
           <div>
-            <h4 className="text-3xl font-bold pb-10">{bookData?.title}</h4>
-            {/* Book Information */}
-            <div className="my-10">
-              {/* Author */}
-              <div className="flex items-center">
-                <div className="px-2">
-                  <BsPen />
-                </div>
+            <div className="min-h-screen hero">
+              <div className="flex-col lg:flex-row hero-content">
+                <img
+                  src={bookData?.img}
+                  className="max-w-sm rounded-lg shadow-2xl"
+                  alt="Book"
+                />
                 <div>
-                  <p className="py-2">{bookData?.author}</p>
-                </div>
-              </div>
-              {/* Category */}
-              <div className="flex items-center">
-                <div className="px-2">
-                  <BiCategory />
-                </div>
-                <div>
-                  <p className="py-2">{bookData?.genre}</p>
-                </div>
-              </div>
-              {/* Publication Year */}
-              <div className="flex items-center">
-                <div className="px-2">
-                  <SlCalender />
-                </div>
-                <div>
-                  <p className="py-2">{bookData?.publicationYear}</p>
-                </div>
-              </div>
-              {/* Status */}
-              <div className="flex items-center">
-                <div className="px-2">
-                  <GrStatusGood />
-                </div>
-                <div>
-                  <p className="py-2">{bookData?.status}</p>
+                  <h4 className="text-3xl font-bold pb-10">
+                    {bookData?.title}
+                  </h4>
+                  {/* Book Information */}
+                  <div className="my-10">
+                    {/* Author */}
+                    <div className="flex items-center">
+                      <div className="px-2">
+                        <BsPen />
+                      </div>
+                      <div>
+                        <p className="py-2">{bookData?.author}</p>
+                      </div>
+                    </div>
+                    {/* Category */}
+                    <div className="flex items-center">
+                      <div className="px-2">
+                        <BiCategory />
+                      </div>
+                      <div>
+                        <p className="py-2">{bookData?.genre}</p>
+                      </div>
+                    </div>
+                    {/* Publication Year */}
+                    <div className="flex items-center">
+                      <div className="px-2">
+                        <SlCalender />
+                      </div>
+                      <div>
+                        <p className="py-2">{bookData?.publicationYear}</p>
+                      </div>
+                    </div>
+                    {/* Status */}
+                    {bookData?.status && (
+                      <div className="flex items-center">
+                        <div className="px-2">
+                          <GrStatusGood />
+                        </div>
+                        <div>
+                          <p className="py-2">{bookData?.status}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  {/* Actions */}
+                  <div className="flex items-center text-xl font-bold">
+                    {/* Edit Link */}
+                    {bookData?.addedBy === email && (
+                      <div className="mr-4">
+                        <Link
+                          to={`/edit/${bookData?.id}`}
+                          className="flex items-center text-green-500"
+                        >
+                          <div className="px-2">
+                            <LuEdit />
+                          </div>
+                          <div>Edit</div>
+                        </Link>
+                      </div>
+                    )}
+                    {/* Delete Button */}
+                    {bookData?.addedBy === email && !Deleting && (
+                      <div
+                        className="ml-4"
+                        onClick={handleDelete}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <div className="text-red-600 flex items-center">
+                          <div>
+                            <RiDeleteBin5Line />
+                          </div>
+                          <div>Delete</div>
+                        </div>
+                      </div>
+                    )}
+                    {Deleting && (
+                      <span className="loading loading-ring loading-lg text-red-500"></span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-            {/* Actions */}
-            <div className="flex items-center text-xl font-bold">
-              {/* Edit Link */}
-              <div className="mr-4">
-                <Link
-                  to={`/edit/${bookData?.id}`}
-                  className="flex items-center text-green-500"
-                >
-                  <div className="px-2">
-                    <LuEdit />
-                  </div>
-                  <div>Edit</div>
-                </Link>
-              </div>
-              {/* Delete Button */}
-              {Deleting ? (
-                <span className="loading loading-ring loading-lg"></span>
-              ) : (
-                <div
-                  className="ml-4"
-                  onClick={handleDelete}
-                  style={{ cursor: "pointer" }}
-                >
-                  <div className="text-red-600 flex items-center">
-                    <div>
-                      <RiDeleteBin5Line />
-                    </div>
-                    <div>Delete</div>
-                  </div>
-                </div>
-              )}
+            {/* Book Description */}
+            <div className="mx-10 text-justify max-w-3xl">
+              <p>{bookData?.description}</p>
             </div>
           </div>
+        )
+      )}
+      {isError && (
+        <div className="text-center text-red-600 ">
+          <p
+            className="text-2xl"
+            style={{
+              fontFamily: "'Allerta', sans-serif",
+            }}
+          >
+            Loading Error !
+          </p>
         </div>
-      </div>
-    </>
+      )}
+    </section>
   );
 }
