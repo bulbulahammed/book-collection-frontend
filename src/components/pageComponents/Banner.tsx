@@ -11,7 +11,7 @@ export default function Banner() {
         fontFamily: "'Kalam', cursive",
       }}
     >
-      <div className="">
+      <div>
         <h3 className="text-white text-center">
           <span className="text-8xl">Welcome</span>
           <br /> <span className="text-2xl py-10">to the world of</span>

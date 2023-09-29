@@ -47,13 +47,19 @@ export default function BookDetails() {
   };
 
   return (
-    <section className="text-center hero min-h-screen bg-base-200">
+    <section
+      className="text-center hero min-h-screen bg-base-200"
+      style={{
+        background: "rgba(255, 194, 139, 0.30)",
+        fontFamily: "'Kalam', cursive",
+      }}
+    >
       {isLoading ? (
         <span className="loading loading-ring loading-lg"></span>
       ) : (
         isSuccess && (
           <div>
-            <div className="min-h-screen hero">
+            <div className="hero py-20">
               <div className="flex-col lg:flex-row hero-content">
                 <img
                   src={bookData?.img}
@@ -67,7 +73,7 @@ export default function BookDetails() {
                   {/* Book Information */}
                   <div className="my-10">
                     {/* Author */}
-                    <div className="flex items-center">
+                    <div className="flex items-center  text-lg">
                       <div className="px-2">
                         <BsPen />
                       </div>
@@ -76,7 +82,7 @@ export default function BookDetails() {
                       </div>
                     </div>
                     {/* Category */}
-                    <div className="flex items-center">
+                    <div className="flex items-center text-lg">
                       <div className="px-2">
                         <BiCategory />
                       </div>
@@ -85,7 +91,7 @@ export default function BookDetails() {
                       </div>
                     </div>
                     {/* Publication Year */}
-                    <div className="flex items-center">
+                    <div className="flex items-center  text-lg">
                       <div className="px-2">
                         <SlCalender />
                       </div>
@@ -95,7 +101,7 @@ export default function BookDetails() {
                     </div>
                     {/* Status */}
                     {bookData?.status && (
-                      <div className="flex items-center">
+                      <div className="flex items-center  text-lg">
                         <div className="px-2">
                           <GrStatusGood />
                         </div>
@@ -144,8 +150,13 @@ export default function BookDetails() {
               </div>
             </div>
             {/* Book Description */}
-            <div className="mx-10 text-justify max-w-3xl">
-              <p>{bookData?.description}</p>
+            <div className="text-justify max-w-3xl mb-20">
+              <div className="text-center text-2xl mb-5">
+                <h2>{`More About ${bookData?.title}`}</h2>
+              </div>
+              <div>
+                <p>{bookData?.description}</p>
+              </div>
             </div>
           </div>
         )

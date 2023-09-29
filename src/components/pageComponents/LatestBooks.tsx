@@ -13,13 +13,7 @@ export default function LatestBooks() {
     toast("Books Can't Load 😟", { toastId: "latestBooksLoadingError" });
   }
   return (
-    <div
-      className="px-10"
-      style={{
-        background: "rgba(255, 194, 139, 0.30)",
-        fontFamily: "'Kalam', cursive",
-      }}
-    >
+    <div className="px-10 my-10">
       {/* Header Section */}
       <div className="text-center py-10">
         <h3 className="text-4xl">Latest Books</h3>
@@ -42,7 +36,7 @@ export default function LatestBooks() {
             </p>
           </div>
         ) : (
-          <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
+          <div className="col-span-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 pb-20">
             {isSuccess &&
               booksData?.map((book: IBook) => (
                 <BookCard key={book.id} book={book} />

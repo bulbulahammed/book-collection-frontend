@@ -1,4 +1,4 @@
-import { BsBook, BsPen } from "react-icons/bs";
+import { BsPen } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { IBook } from "../../types/globaltypes";
 
@@ -8,27 +8,23 @@ interface IProps {
 
 export default function BookCard({ book }: IProps) {
   return (
-    <div>
+    <div
+      style={{
+        fontFamily: "'Roboto', sans-serif",
+      }}
+    >
       <Link to={`/bookDetails/${book.id}`}>
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure className="px-10 pt-10">
+        <div className="card bg-base-100 shadow-xl">
+          <figure className="px-5 pt-5">
             <img
-              style={{ height: "250px", width: "150px" }}
+              style={{ height: "200px", width: "170px" }}
               src={book.img}
               alt="Shoes"
               className="rounded-xl"
             />
           </figure>
-          <div
-            className="card-body text-left"
-            style={{
-              fontFamily: "'Roboto', sans-serif",
-            }}
-          >
-            <h2 className="card-title">
-              <BsBook /> {book.title}
-            </h2>
-            <div className="flex">
+          <div className="card-body text-left">
+            <div className="flex text-sm">
               <span className="pr-2">
                 <BsPen />
               </span>

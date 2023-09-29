@@ -55,19 +55,24 @@ export default function AddBook() {
   }, [isSuccess, isError, ToastMessage, navigate]);
 
   return (
-    <section>
+    <section
+      style={{
+        background: "rgba(255, 194, 139, 0.30)",
+        fontFamily: "'Kalam', cursive",
+      }}
+    >
       <div className="bg-grey-lighter min-h-screen flex flex-col">
-        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div className="container max-w-2xl mx-auto flex-1 flex flex-col items-center justify-center px-2  my-20">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h1 className="mb-10 text-xl text-center">Add New Book</h1>
+            <h1 className="mb-10 text-4xl text-center">Add New Book</h1>
             <form onSubmit={handleSubmit}>
               {/*----------- Label For Title ------------*/}
               <label className="label">
-                <span className="label-text text-sm">Title</span>
+                <span className="label-text text-lg">Title</span>
               </label>
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 name="title"
                 placeholder="Title"
                 value={formData.book.title}
@@ -76,11 +81,11 @@ export default function AddBook() {
               />
               {/*----------- Label For Author ------------*/}
               <label className="label">
-                <span className="label-text text-sm">Author</span>
+                <span className="label-text text-lg">Author</span>
               </label>
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 name="author"
                 placeholder="Author"
                 value={formData.book.author}
@@ -89,11 +94,11 @@ export default function AddBook() {
               />
               {/*----------- Label For Genre ------------*/}
               <label className="label">
-                <span className="label-text text-sm">Genre</span>
+                <span className="label-text text-lg">Genre</span>
               </label>
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 name="genre"
                 placeholder="Genre"
                 value={formData.book.genre}
@@ -102,11 +107,11 @@ export default function AddBook() {
               />
               {/*----------- Label For Publication Year ------------*/}
               <label className="label">
-                <span className="label-text text-sm">Publication Year</span>
+                <span className="label-text text-lg">Publication Year</span>
               </label>
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 name="publicationYear"
                 placeholder="Publication Year"
                 value={formData.book.publicationYear}
@@ -115,10 +120,10 @@ export default function AddBook() {
               />
               {/*----------- Label For  Description ------------*/}
               <label className="label">
-                <span className="label-text text-sm">Description</span>
+                <span className="label-text text-lg">Description</span>
               </label>
               <textarea
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 name="description"
                 placeholder="Description"
                 value={formData.book.description}
@@ -127,7 +132,7 @@ export default function AddBook() {
               />
               {/*----------- Label For  Image ------------*/}
               <label className="label">
-                <span className="label-text text-sm">Image</span>
+                <span className="label-text text-lg">Image</span>
               </label>
               <div className="flex items-center space-x-4">
                 <FileBase
@@ -157,13 +162,13 @@ export default function AddBook() {
               </div>
 
               {isLoading ? (
-                <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
-                  <span className="loading loading-spinner text-info"></span>
+                <button className="w-full text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
+                  <span className="loading loading-ring loading-lg"></span>
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1"
+                  className="w-full text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-8"
                 >
                   Add Book
                 </button>
