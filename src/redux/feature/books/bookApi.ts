@@ -39,7 +39,7 @@ const bookApi = api.injectEndpoints({
     }),
 
     getLatestBooks: builder.query({
-      query: () => `books/?limit=3&sortBy=createdAt&sortOrder=desc`,
+      query: () => `books/?limit=6&sortBy=createdAt&sortOrder=desc`,
       providesTags: ["Books"],
     }),
     getBooks: builder.query({
