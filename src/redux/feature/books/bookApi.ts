@@ -2,6 +2,7 @@ import { api } from "../../api/apiSlice";
 
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    // Add Book
     addBook: builder.mutation({
       query: (body: {
         book: {
@@ -22,6 +23,8 @@ const bookApi = api.injectEndpoints({
       },
       invalidatesTags: ["Books"],
     }),
+
+    // Update Book
     updateBook: builder.mutation({
       query: ({ id, ...data }) => ({
         url: `books/${id}`,
@@ -30,6 +33,8 @@ const bookApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Books"],
     }),
+
+    //Delete Books
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `books/${id}`,
@@ -38,14 +43,19 @@ const bookApi = api.injectEndpoints({
       invalidatesTags: ["Books"],
     }),
 
+    // Get Latest Books
     getLatestBooks: builder.query({
       query: () => `books/?limit=6&sortBy=createdAt&sortOrder=desc`,
       providesTags: ["Books"],
     }),
+
+    // Get All Books
     getBooks: builder.query({
       query: () => `/books`,
       providesTags: ["Books"],
     }),
+
+    // Get Single Book
     getSingleBooks: builder.query({
       query: (id) => `books/${id}`,
       providesTags: ["Books"],
