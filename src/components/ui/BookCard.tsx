@@ -1,4 +1,3 @@
-import { BsPen } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { IBook } from "../../types/globaltypes";
 
@@ -25,10 +24,7 @@ export default function BookCard({ book }: IProps) {
           </figure>
           <div className="card-body text-left">
             <div className="flex text-sm">
-              <span className="pr-2">
-                <BsPen />
-              </span>
-              <p> {book.author}</p>
+              <p> {book.title}</p>
             </div>
             <div className="card-actions text-center"></div>
           </div>
