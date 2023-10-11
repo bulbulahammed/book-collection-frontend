@@ -1,7 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ParamSerialization } from "../../../lib/ParamSerialization";
 import { api } from "../../api/apiSlice";
 
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    //Get All books
+    getBooks: builder.query({
+      query: (args: Record<string, unknown>) => {
+        const query = args ? ParamSerialization(args) : "";
+        return `/books?${query}`;
+      },
+      providesTags: ["Books"],
+    }),
     // Add Book
     addBook: builder.mutation({
       query: (body: {
@@ -46,12 +56,6 @@ const bookApi = api.injectEndpoints({
     // Get Latest Books
     getLatestBooks: builder.query({
       query: () => `books/?limit=6&sortBy=createdAt&sortOrder=desc`,
-      providesTags: ["Books"],
-    }),
-
-    // Get All Books
-    getBooks: builder.query({
-      query: () => `/books`,
       providesTags: ["Books"],
     }),
 

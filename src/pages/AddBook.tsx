@@ -168,7 +168,7 @@ export default function AddBook() {
               ) : (
                 <button
                   type="submit"
-                  className="w-full text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-8"
+                  className="w-full text-center py-3 rounded btn-accent text-white focus:outline-none my-8"
                 >
                   Add Book
                 </button>
