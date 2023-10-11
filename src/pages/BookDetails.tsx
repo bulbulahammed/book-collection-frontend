@@ -158,6 +158,8 @@ export default function BookDetails() {
                 <p>{bookData?.description}</p>
               </div>
             </div>
+            {/* Books Review By Readers */}
+            <div>Books Review</div>
           </div>
         )
       )}
