@@ -20,6 +20,8 @@ export default function BookDetails() {
   const { data, isLoading, isError, isSuccess } = useGetSingleBooksQuery(id);
   const bookData = data?.data;
 
+  console.log(bookData);
+
   const { email } = useAppSelector((state) => state.auth.user);
 
   const [
@@ -159,7 +161,9 @@ export default function BookDetails() {
               </div>
             </div>
             {/* Books Review By Readers */}
-            <div>Books Review</div>
+            <div>
+              <p>{bookData?.reviews}</p>
+            </div>
           </div>
         )
       )}
