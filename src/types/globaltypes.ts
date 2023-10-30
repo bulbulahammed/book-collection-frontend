@@ -22,8 +22,9 @@ export type IUser = {
 
 export type IBookStatus = "N/A" | "Reading" | "Finished";
 
-export type IBookReviews = {
-  review: string[];
+export type IBookReview = {
+  comment: string;
+  reviewer: string;
 };
 
 export type IBook = {
@@ -34,7 +35,7 @@ export type IBook = {
   img: string;
   addedBy?: string;
   status: IBookStatus;
-  reviews?: IBookReviews;
+  reviews?: IBookReview;
   id?: string;
   description: string;
 };

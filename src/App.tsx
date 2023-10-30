@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "./redux/hook";
 function App() {
   // For user Persistency.
   const dispatch = useAppDispatch();
-  const { auth } = useAppSelector((state) => state);
+  const auth = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (auth.token && auth.user.email) {

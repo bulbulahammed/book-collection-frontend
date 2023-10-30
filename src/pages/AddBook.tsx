@@ -58,17 +58,17 @@ export default function AddBook() {
     <section
       style={{
         background: "rgba(255, 194, 139, 0.30)",
-        fontFamily: "'Kalam', cursive",
       }}
+      className="min-h-screen"
     >
-      <div className="bg-grey-lighter min-h-screen flex flex-col">
-        <div className="container max-w-2xl mx-auto flex-1 flex flex-col items-center justify-center px-2  my-20">
-          <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h1 className="mb-10 text-4xl text-center">Add New Book</h1>
+      <div className="container mx-auto py-20">
+        <div className="max-w-2xl mx-auto flex-1 flex flex-col items-center justify-center px-2">
+          <div className="bg-white px-10 py-8 rounded shadow-lg text-black">
+            <h2 className="mb-6 mt-4 text-xl text-center">Add Book</h2>
             <form onSubmit={handleSubmit}>
               {/*----------- Label For Title ------------*/}
               <label className="label">
-                <span className="label-text text-lg">Title</span>
+                <span className="label-text text-sm">Title</span>
               </label>
               <input
                 type="text"
@@ -81,7 +81,7 @@ export default function AddBook() {
               />
               {/*----------- Label For Author ------------*/}
               <label className="label">
-                <span className="label-text text-lg">Author</span>
+                <span className="label-text text-sm">Author</span>
               </label>
               <input
                 type="text"
@@ -94,7 +94,7 @@ export default function AddBook() {
               />
               {/*----------- Label For Genre ------------*/}
               <label className="label">
-                <span className="label-text text-lg">Genre</span>
+                <span className="label-text text-sm">Genre</span>
               </label>
               <input
                 type="text"
@@ -107,7 +107,7 @@ export default function AddBook() {
               />
               {/*----------- Label For Publication Year ------------*/}
               <label className="label">
-                <span className="label-text text-lg">Publication Year</span>
+                <span className="label-text text-sm">Publication Year</span>
               </label>
               <input
                 type="text"
@@ -120,7 +120,7 @@ export default function AddBook() {
               />
               {/*----------- Label For  Description ------------*/}
               <label className="label">
-                <span className="label-text text-lg">Description</span>
+                <span className="label-text text-sm">Description</span>
               </label>
               <textarea
                 className="input input-bordered w-full"
@@ -132,7 +132,7 @@ export default function AddBook() {
               />
               {/*----------- Label For  Image ------------*/}
               <label className="label">
-                <span className="label-text text-lg">Image</span>
+                <span className="label-text text-sm">Image</span>
               </label>
               <div className="flex items-center space-x-4">
                 <FileBase
@@ -162,7 +162,7 @@ export default function AddBook() {
               </div>
 
               {isLoading ? (
-                <button className="w-full text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
+                <button className="w-full text-center py-3 rounded btn-accent text-white focus:outline-none my-1">
                   <span className="loading loading-ring loading-lg"></span>
                 </button>
               ) : (
