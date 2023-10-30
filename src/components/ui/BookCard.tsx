@@ -11,22 +11,17 @@ export default function BookCard({ book }: IProps) {
       style={{
         fontFamily: "'Roboto', sans-serif",
       }}
+      className="hover:shadow-2xl hover:scale-[120%] transition-all duration-300 rounded-lg shadow-2xl"
     >
       <Link to={`/bookDetails/${book.id}`}>
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card">
           <figure className="px-5 pt-5">
-            <img
-              style={{ height: "200px", width: "170px" }}
-              src={book.img}
-              alt="Shoes"
-              className="rounded-xl"
-            />
+            <img src={book.img} alt="Shoes" className="rounded-xl" />
           </figure>
           <div className="card-body text-left">
             <div className="flex text-sm">
               <p> {book.title}</p>
             </div>
-            <div className="card-actions text-center"></div>
           </div>
         </div>
       </Link>

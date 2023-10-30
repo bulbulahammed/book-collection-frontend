@@ -12,9 +12,11 @@ export default function Home() {
       }}
     >
       <Banner />
-      <LatestBooks />
-      <Category />
-      <Contact />
+      <div className="container mx-auto">
+        <LatestBooks />
+        <Category />
+        <Contact />
+      </div>
     </div>
   );
 }

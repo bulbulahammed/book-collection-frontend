@@ -1,3 +1,3 @@
 export default function RecentBooks() {
-  return <div>RecentBooks</div>;
+  return <div className="container mx-auto">RecentBooks</div>;
 }

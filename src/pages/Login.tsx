@@ -57,8 +57,13 @@ export default function Login() {
     signinUser(formData);
   };
   return (
-    <section className="">
-      <div className="bg-grey-lighter min-h-screen flex flex-col">
+    <section
+      className="min-h-screen flex items-center"
+      style={{
+        background: "rgba(255, 194, 139, 0.30)",
+      }}
+    >
+      <div className="container mx-auto">
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <h1 className="mb-10 text-xl text-center">Login</h1>
@@ -88,13 +93,13 @@ export default function Login() {
                 placeholder="examplePassword123"
               />
               {isLoading ? (
-                <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
+                <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white focus:outline-none my-4">
                   <span className="loading loading-spinner text-info"></span>
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1"
+                  className="w-full max-w-xs text-center py-3 rounded btn-accent text-white focus:outline-none my-4"
                 >
                   Login
                 </button>

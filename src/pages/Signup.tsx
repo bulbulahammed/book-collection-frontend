@@ -43,12 +43,18 @@ export default function Signup() {
     e.preventDefault();
     signupUser(formData);
   };
+
   return (
-    <section>
-      <div className="bg-grey-lighter min-h-screen flex flex-col">
-        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-          <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <h1 className="mb-10 text-xl text-center">Sign Up</h1>
+    <section
+      className="min-h-screen flex items-center"
+      style={{
+        background: "rgba(255, 194, 139, 0.30)",
+      }}
+    >
+      <div className="flex container mx-auto">
+        <div className="mx-auto">
+          <div className="bg-white px-10 py-8 rounded shadow-lg text-black">
+            <h2 className="mb-6 mt-4 text-xl text-center">Sign Up</h2>
             <form onSubmit={handleSubmit}>
               {/*----------- Label For Name ------------*/}
               <label className="label">
@@ -56,7 +62,7 @@ export default function Signup() {
               </label>
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full pr-20"
                 name="firstName"
                 value={formData.user.firstName}
                 onChange={handleChange}
@@ -67,7 +73,7 @@ export default function Signup() {
               </label>
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full pr-20"
                 name="lastName"
                 value={formData.user.lastName}
                 onChange={handleChange}
@@ -78,7 +84,7 @@ export default function Signup() {
               </label>
               <input
                 type="email"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full pr-20"
                 name="email"
                 value={formData.user.email}
                 onChange={handleChange}
@@ -90,20 +96,20 @@ export default function Signup() {
               </label>
               <input
                 type="password"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full pr-20"
                 name="password"
                 value={formData.user.password}
                 onChange={handleChange}
                 placeholder="examplePassword123"
               />
               {isLoading ? (
-                <button className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1">
+                <button className="px-4 w-full max-w-xs text-center py-3 rounded btn-accent text-white focus:outline-none my-4">
                   <span className="loading loading-spinner text-info"></span>
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="w-full max-w-xs text-center py-3 rounded btn-accent text-white hover:bg-green-dark focus:outline-none my-1"
+                  className="w-full max-w-xs text-center py-4 rounded btn-accent text-white focus:outline-none my-4"
                 >
                   SignUp
                 </button>
