@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,12 +10,16 @@ export default function InputReviews() {
   const { id } = useParams();
   const user = useAppSelector((state) => state.auth.user.email);
 
-  const [addReview, { data, isLoading, isSuccess, isError }] =
-    useAddReviewMutation();
+  const [addReview, { isLoading, isSuccess, isError }] = useAddReviewMutation();
 
-  if (isError) {
-    toast.error("Update Failed!", { toastId: "ErrorOnComment" });
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Comment Added", { toastId: "SuccessInputComment" });
+    }
+    if (isError) {
+      toast.error("Failed to Add", { toastId: "ErrorOnCommentAdd" });
+    }
+  }, [addReview, isError, isSuccess]);
 
   const [reviewData, setReviewData] = useState({
     comment: "",
@@ -36,16 +40,13 @@ export default function InputReviews() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Check if the comment and reviewer fields are not empty
     if (reviewData.comment.trim() === "" || reviewData.reviewer.trim() === "") {
-      // Display an error message or take appropriate action
       toast.error("Comment and reviewer fields cannot be empty", {
         toastId: "ErrorOnComment",
       });
       return;
     }
     addReview({ id, reviewData });
-    // Clear the input field
     setReviewData({
       comment: "",
       reviewer: user || "",
