@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { api } from "../../api/apiSlice";
 
 const reviewApiSlice = api.injectEndpoints({
@@ -10,7 +11,15 @@ const reviewApiSlice = api.injectEndpoints({
       }),
       invalidatesTags: ["Review"],
     }),
+    //Delete Review
+    deleteReview: builder.mutation({
+      query: ({ bookId, reviewId }) => ({
+        url: `reviews/${bookId}/review/${reviewId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
-export const { useAddReviewMutation } = reviewApiSlice;
+export const { useAddReviewMutation, useDeleteReviewMutation } = reviewApiSlice;

@@ -25,6 +25,7 @@ export type IBookStatus = "N/A" | "Reading" | "Finished";
 export type IBookReview = {
   comment: string;
   reviewer: string;
+  _id: string;
 };
 
 export type IBook = {

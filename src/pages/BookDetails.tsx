@@ -24,10 +24,9 @@ export default function BookDetails() {
     refetchOnMountOrArgChange: true,
     pollingInterval: 1000,
   });
+
   const bookData = data?.data;
-
   const reviews = data?.data?.reviews;
-
   const email = useAppSelector((state) => state.auth.user.email);
 
   const [
@@ -37,11 +36,11 @@ export default function BookDetails() {
 
   useEffect(() => {
     if (Deleted) {
-      toast.success("Successfully Deleted", { toastId: "successDelete" });
+      toast.success("Book Deleted", { toastId: "successDeleteBook" });
       navigate("/");
     }
     if (DeleteError) {
-      toast.error("Failed to delete", { toastId: "deleteError" });
+      toast.error("Failed to delete", { toastId: "errorOnDeleteBook" });
     }
   }, [Deleted, DeleteError, navigate]);
 
