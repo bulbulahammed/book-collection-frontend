@@ -29,8 +29,8 @@ export default function FilterBook({ filter }: IFilterBook) {
   });
 
   const AllBook = data?.data;
-  let uniqueGenres: string[] = []; // Initialize as an empty array
-  let uniquePublicationYears: string[] = []; // Initialize as an empty array for publication years
+  let uniqueGenres: string[] = [];
+  let uniquePublicationYears: string[] = [];
 
   // Check if AllBook is defined
   if (AllBook) {

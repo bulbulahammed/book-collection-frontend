@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { BiCategory } from "react-icons/bi";
 import { BsPen } from "react-icons/bs";
-import { GrStatusGood } from "react-icons/gr";
 import { LuEdit } from "react-icons/lu";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { SlCalender } from "react-icons/sl";
@@ -20,6 +19,8 @@ import { IBookReview } from "../types/globaltypes";
 export default function BookDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  //Get Single Book
   const { data, isLoading, isError, isSuccess } = useGetSingleBooksQuery(id, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 1000,
@@ -27,7 +28,7 @@ export default function BookDetails() {
 
   const bookData = data?.data;
   const reviews = data?.data?.reviews;
-  const email = useAppSelector((state) => state.auth.user.email);
+  const user = useAppSelector((state) => state.auth.user.email);
 
   const [
     deleteBook,
@@ -107,22 +108,11 @@ export default function BookDetails() {
                           <p className="py-2">{bookData?.publicationYear}</p>
                         </div>
                       </div>
-                      {/* Status */}
-                      {bookData?.status && (
-                        <div className="flex items-center  text-lg">
-                          <div className="px-2">
-                            <GrStatusGood />
-                          </div>
-                          <div>
-                            <p className="py-2">{bookData?.status}</p>
-                          </div>
-                        </div>
-                      )}
                     </div>
                     {/* Actions */}
                     <div className="flex items-center text-xl font-bold">
                       {/* Edit Link */}
-                      {bookData?.addedBy === email && (
+                      {bookData?.addedBy === user && (
                         <div className="mr-4">
                           <Link
                             to={`/edit/${bookData?.id}`}
@@ -136,7 +126,7 @@ export default function BookDetails() {
                         </div>
                       )}
                       {/* Delete Button */}
-                      {bookData?.addedBy === email && !Deleting && (
+                      {bookData?.addedBy === user && !Deleting && (
                         <div
                           className="ml-4"
                           onClick={handleDelete}
@@ -169,7 +159,7 @@ export default function BookDetails() {
               {/* Books Review By Readers */}
               <div className="flex flex-col justify-center items-center">
                 {/* Logged in user Can Comment */}
-                {email && (
+                {user && (
                   <div className="bg-white rounded-md p-4 shadow-md w-full max-w-lg text-center">
                     <InputReviews />
                   </div>

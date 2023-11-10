@@ -20,11 +20,13 @@ export default function Login() {
           token: data.data.token,
           user: {
             email: data.data.user.email,
+            id: data.data.user._id,
           },
         })
       );
       localStorage.setItem("token", data.data.token);
       localStorage.setItem("email", data.data.user.email);
+      localStorage.setItem("id", data?.data.user._id);
       navigate("/");
       toast.success("Login Successfully ✌", { toastId: "LoginSuccess" });
     }

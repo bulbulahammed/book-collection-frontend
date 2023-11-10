@@ -20,7 +20,11 @@ export type IUser = {
   wishList?: IWishList;
 };
 
-export type IBookStatus = "N/A" | "Reading" | "Finished";
+export type IBookStatus = {
+  status: string;
+  user: string;
+  _id: string;
+};
 
 export type IBookReview = {
   comment: string;
@@ -35,7 +39,7 @@ export type IBook = {
   publicationYear: string;
   img: string;
   addedBy?: string;
-  status: IBookStatus;
+  status?: IBookStatus;
   reviews?: IBookReview;
   id?: string;
   description: string;

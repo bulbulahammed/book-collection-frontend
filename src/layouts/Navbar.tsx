@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from "react-router-dom";
 import { defaultState } from "../redux/feature/user/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
@@ -9,6 +10,7 @@ export default function Navbar() {
     dispatch(defaultState());
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    localStorage.removeItem("id");
   };
 
   return (
