@@ -26,10 +26,20 @@ const userApiSlice = api.injectEndpoints({
         };
       },
     }),
+    // Add to wish list
     addToWishList: builder.mutation({
       query: ({ userId, bookId }) => {
         return {
           url: `/users/wishList/${userId}/${bookId}`,
+          method: "PATCH",
+        };
+      },
+    }),
+    // Add to Reading list
+    addToReadingList: builder.mutation({
+      query: ({ userId, bookId }) => {
+        return {
+          url: `/users/readingList/${userId}/${bookId}`,
           method: "PATCH",
         };
       },
@@ -40,5 +50,6 @@ const userApiSlice = api.injectEndpoints({
 export const {
   useSigninUserMutation,
   useSignupUserMutation,
-  useAddToWishListMutation, // Add this line
+  useAddToWishListMutation,
+  useAddToReadingListMutation,
 } = userApiSlice;

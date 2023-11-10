@@ -4,7 +4,10 @@ import { BiBookAlt, BiSolidBookAlt } from "react-icons/bi";
 import { BsBook, BsBookFill, BsFillHeartFill, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAddToWishListMutation } from "../../redux/feature/user/userApiSlice";
+import {
+  useAddToReadingListMutation,
+  useAddToWishListMutation,
+} from "../../redux/feature/user/userApiSlice";
 import { useAppSelector } from "../../redux/hook";
 import { IBook } from "../../types/globaltypes";
 
@@ -24,6 +27,16 @@ export default function BookCard({ book }: IProps) {
     { isLoading, isError: wishListError, isSuccess: AddedToWishList },
   ] = useAddToWishListMutation();
 
+  // Add To Reading List
+  const [
+    addToReadingList,
+    {
+      isLoading: readingListLoading,
+      isError: readingListError,
+      isSuccess: readingListSuccess,
+    },
+  ] = useAddToReadingListMutation();
+
   useEffect(() => {
     if (AddedToWishList) {
       toast.success("Added To Wish List", { toastId: "successWishList" });
@@ -31,11 +44,30 @@ export default function BookCard({ book }: IProps) {
     if (wishListError) {
       toast.error("Failed to Add WishList", { toastId: "errorWishList" });
     }
-  }, [addToWishList, AddedToWishList, wishListError]);
+
+    if (readingListSuccess) {
+      toast.success("Added To Reading List", { toastId: "successReadingList" });
+    }
+    if (readingListError) {
+      toast.error("Failed to Add Reading List", { toastId: "errorReadinList" });
+    }
+  }, [
+    addToWishList,
+    AddedToWishList,
+    wishListError,
+    readingListSuccess,
+    readingListError,
+  ]);
 
   const handleWishList = () => {
     if (bookId && userId) {
       addToWishList({ userId, bookId });
+    }
+  };
+
+  const handleReadingList = () => {
+    if (bookId && userId) {
+      addToReadingList({ userId, bookId });
     }
   };
 
@@ -61,8 +93,10 @@ export default function BookCard({ book }: IProps) {
               </button>
             </div>
             <div>
-              <BsBook />
-              <BsBookFill />
+              <button onClick={handleReadingList}>
+                <BsBook />
+                <BsBookFill />
+              </button>
             </div>
             <div>
               <BiBookAlt />
