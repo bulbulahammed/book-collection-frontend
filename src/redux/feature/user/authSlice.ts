@@ -4,6 +4,7 @@ export interface IAuthState {
   token: string | null;
   user: {
     email: string | null;
+    id: string | null;
   };
   isLoading: boolean;
   isError: boolean;
@@ -12,11 +13,13 @@ export interface IAuthState {
 
 const storedToken = localStorage.getItem("token");
 const storedEmail = localStorage.getItem("email");
+const storedId = localStorage.getItem("id");
 
 const initialState: IAuthState = {
   token: storedToken !== null ? storedToken : null,
   user: {
     email: storedEmail !== null ? storedEmail : null,
+    id: storedId !== null ? storedId : null,
   },
   isLoading: false,
   isError: false,
@@ -33,15 +36,21 @@ export const authSlice = createSlice({
         token: string;
         user: {
           email: string;
+          id: string;
         };
       }>
     ) => {
       state.token = action.payload.token;
       state.user.email = action.payload.user.email;
+
+      // Retrieve id from local storage and update the state
+      const storedId = localStorage.getItem("id");
+      state.user.id = storedId !== null ? storedId : null;
     },
     defaultState: (state) => {
       state.token = null;
       state.user.email = null;
+      state.user.id = null;
     },
   },
 });

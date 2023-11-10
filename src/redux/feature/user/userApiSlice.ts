@@ -1,5 +1,4 @@
 import { api } from "../../api/apiSlice";
-
 const userApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     signinUser: builder.mutation({
@@ -27,7 +26,19 @@ const userApiSlice = api.injectEndpoints({
         };
       },
     }),
+    addToWishList: builder.mutation({
+      query: ({ userId, bookId }) => {
+        return {
+          url: `/users/wishList/${userId}/${bookId}`,
+          method: "PATCH",
+        };
+      },
+    }),
   }),
 });
 
-export const { useSigninUserMutation, useSignupUserMutation } = userApiSlice;
+export const {
+  useSigninUserMutation,
+  useSignupUserMutation,
+  useAddToWishListMutation, // Add this line
+} = userApiSlice;
