@@ -14,7 +14,9 @@ interface IProps {
 
 export default function BookCard({ book }: IProps) {
   const userId = useAppSelector((state) => state.auth.user.id);
-  const bookInCard = book.id;
+  const bookId = book.id;
+
+  console.log("This is Book Id:", bookId, "This is User Id: ", userId);
 
   // Add To Wish List
   const [
@@ -32,8 +34,8 @@ export default function BookCard({ book }: IProps) {
   }, [addToWishList, AddedToWishList, wishListError]);
 
   const handleWishList = () => {
-    if (bookInCard && userId) {
-      addToWishList({ userId, bookInCard });
+    if (bookId && userId) {
+      addToWishList({ userId, bookId });
     }
   };
 
