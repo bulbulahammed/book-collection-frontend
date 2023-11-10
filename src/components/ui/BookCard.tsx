@@ -5,6 +5,7 @@ import { BsBook, BsBookFill, BsFillHeartFill, BsHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
+  useAddToReadListMutation,
   useAddToReadingListMutation,
   useAddToWishListMutation,
 } from "../../redux/feature/user/userApiSlice";
@@ -18,8 +19,6 @@ interface IProps {
 export default function BookCard({ book }: IProps) {
   const userId = useAppSelector((state) => state.auth.user.id);
   const bookId = book.id;
-
-  console.log("This is Book Id:", bookId, "This is User Id: ", userId);
 
   // Add To Wish List
   const [
@@ -37,6 +36,16 @@ export default function BookCard({ book }: IProps) {
     },
   ] = useAddToReadingListMutation();
 
+  // Add To Reading List
+  const [
+    addToReadList,
+    {
+      isLoading: readListLoading,
+      isError: readListError,
+      isSuccess: readListSuccess,
+    },
+  ] = useAddToReadListMutation();
+
   useEffect(() => {
     if (AddedToWishList) {
       toast.success("Added To Wish List", { toastId: "successWishList" });
@@ -49,7 +58,16 @@ export default function BookCard({ book }: IProps) {
       toast.success("Added To Reading List", { toastId: "successReadingList" });
     }
     if (readingListError) {
-      toast.error("Failed to Add Reading List", { toastId: "errorReadinList" });
+      toast.error("Failed to Add Reading List", {
+        toastId: "errorReadingList",
+      });
+    }
+
+    if (readListSuccess) {
+      toast.success("Added To Read List", { toastId: "successReadList" });
+    }
+    if (readListError) {
+      toast.error("Failed to Add Read List", { toastId: "errorReadList" });
     }
   }, [
     addToWishList,
@@ -57,17 +75,28 @@ export default function BookCard({ book }: IProps) {
     wishListError,
     readingListSuccess,
     readingListError,
+    readListSuccess,
+    readListError,
   ]);
 
+  // Wish List Handler
   const handleWishList = () => {
     if (bookId && userId) {
       addToWishList({ userId, bookId });
     }
   };
 
+  // Reading List Handler
   const handleReadingList = () => {
     if (bookId && userId) {
       addToReadingList({ userId, bookId });
+    }
+  };
+
+  // Read List Handler
+  const handleReadList = () => {
+    if (bookId && userId) {
+      addToReadList({ userId, bookId });
     }
   };
 
@@ -99,8 +128,10 @@ export default function BookCard({ book }: IProps) {
               </button>
             </div>
             <div>
-              <BiBookAlt />
-              <BiSolidBookAlt />
+              <button onClick={handleReadList}>
+                <BiBookAlt />
+                <BiSolidBookAlt />
+              </button>
             </div>
           </div>
         </div>
