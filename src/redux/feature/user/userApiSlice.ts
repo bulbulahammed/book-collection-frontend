@@ -44,6 +44,15 @@ const userApiSlice = api.injectEndpoints({
         };
       },
     }),
+    // Add to Reading list
+    addToReadList: builder.mutation({
+      query: ({ userId, bookId }) => {
+        return {
+          url: `/users/readList/${userId}/${bookId}`,
+          method: "PATCH",
+        };
+      },
+    }),
   }),
 });
 
@@ -52,4 +61,5 @@ export const {
   useSignupUserMutation,
   useAddToWishListMutation,
   useAddToReadingListMutation,
+  useAddToReadListMutation,
 } = userApiSlice;
