@@ -4,14 +4,14 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setUser } from "../redux/feature/user/authSlice";
-import { useSigninUserMutation } from "../redux/feature/user/userApiSlice";
+import { useSignInUserMutation } from "../redux/feature/user/userApiSlice";
 import { useAppDispatch } from "../redux/hook";
 
 export default function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [signinUser, { data, isLoading, isError, isSuccess }] =
-    useSigninUserMutation();
+    useSignInUserMutation();
 
   useEffect(() => {
     if (isSuccess) {

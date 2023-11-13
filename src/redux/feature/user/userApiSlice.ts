@@ -1,7 +1,8 @@
 import { api } from "../../api/apiSlice";
 const userApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    signinUser: builder.mutation({
+    // Sign In / Login User
+    signInUser: builder.mutation({
       query: (body: { user: { email: string; password: string } }) => {
         return {
           url: "/users/login",
@@ -10,6 +11,7 @@ const userApiSlice = api.injectEndpoints({
         };
       },
     }),
+    // Sign Up / Register New User
     signupUser: builder.mutation({
       query: (body: {
         user: {
@@ -25,6 +27,11 @@ const userApiSlice = api.injectEndpoints({
           body,
         };
       },
+    }),
+    // Get single User By ID
+    getSingleUser: builder.query({
+      query: (id) => `users/${id}`,
+      providesTags: ["User"],
     }),
     // Add to wish list
     addToWishList: builder.mutation({
@@ -57,8 +64,9 @@ const userApiSlice = api.injectEndpoints({
 });
 
 export const {
-  useSigninUserMutation,
+  useSignInUserMutation,
   useSignupUserMutation,
+  useGetSingleUserQuery,
   useAddToWishListMutation,
   useAddToReadingListMutation,
   useAddToReadListMutation,

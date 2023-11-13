@@ -8,6 +8,7 @@ import {
   useAddToReadListMutation,
   useAddToReadingListMutation,
   useAddToWishListMutation,
+  useGetSingleUserQuery,
 } from "../../redux/feature/user/userApiSlice";
 import { useAppSelector } from "../../redux/hook";
 import { IBook } from "../../types/globaltypes";
@@ -20,30 +21,31 @@ export default function BookCard({ book }: IProps) {
   const userId = useAppSelector((state) => state.auth.user.id);
   const bookId = book.id;
 
+  const { data: userData } = useGetSingleUserQuery(userId);
+  const wishList = userData?.data?.wishList.bookId;
+  const readingList = userData?.data?.readingList.bookId;
+  const readList = userData?.data?.readList.bookId;
+
+  const bookIsInWishList = wishList?.includes(bookId);
+  const bookIsInReadingList = readingList?.includes(bookId);
+  const bookIsInReadList = readList?.includes(bookId);
+
   // Add To Wish List
   const [
     addToWishList,
-    { isLoading, isError: wishListError, isSuccess: AddedToWishList },
+    { isError: wishListError, isSuccess: AddedToWishList },
   ] = useAddToWishListMutation();
 
   // Add To Reading List
   const [
     addToReadingList,
-    {
-      isLoading: readingListLoading,
-      isError: readingListError,
-      isSuccess: readingListSuccess,
-    },
+    { isError: readingListError, isSuccess: readingListSuccess },
   ] = useAddToReadingListMutation();
 
   // Add To Reading List
   const [
     addToReadList,
-    {
-      isLoading: readListLoading,
-      isError: readListError,
-      isSuccess: readListSuccess,
-    },
+    { isError: readListError, isSuccess: readListSuccess },
   ] = useAddToReadListMutation();
 
   useEffect(() => {
@@ -117,20 +119,17 @@ export default function BookCard({ book }: IProps) {
           <div className="flex justify-evenly">
             <div>
               <button onClick={handleWishList}>
-                <BsFillHeartFill />
-                <BsHeart />
+                {bookIsInWishList ? <BsFillHeartFill /> : <BsHeart />}
               </button>
             </div>
             <div>
               <button onClick={handleReadingList}>
-                <BsBook />
-                <BsBookFill />
+                {bookIsInReadingList ? <BsBookFill /> : <BsBook />}
               </button>
             </div>
             <div>
               <button onClick={handleReadList}>
-                <BiBookAlt />
-                <BiSolidBookAlt />
+                {bookIsInReadList ? <BiSolidBookAlt /> : <BiBookAlt />}
               </button>
             </div>
           </div>
