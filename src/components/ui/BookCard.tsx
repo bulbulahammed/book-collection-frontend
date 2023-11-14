@@ -21,7 +21,8 @@ export default function BookCard({ book }: IProps) {
   const userId = useAppSelector((state) => state.auth.user.id);
   const bookId = book.id;
 
-  const { data: userData } = useGetSingleUserQuery(userId);
+  const { data: userData, refetch: refetchUserData } =
+    useGetSingleUserQuery(userId);
   const wishList = userData?.data?.wishList.bookId;
   const readingList = userData?.data?.readingList.bookId;
   const readList = userData?.data?.readList.bookId;
@@ -50,6 +51,7 @@ export default function BookCard({ book }: IProps) {
 
   useEffect(() => {
     if (AddedToWishList) {
+      refetchUserData();
       toast.success("Added To Wish List", { toastId: "successWishList" });
     }
     if (wishListError) {
@@ -57,6 +59,7 @@ export default function BookCard({ book }: IProps) {
     }
 
     if (readingListSuccess) {
+      refetchUserData();
       toast.success("Added To Reading List", { toastId: "successReadingList" });
     }
     if (readingListError) {
@@ -66,6 +69,7 @@ export default function BookCard({ book }: IProps) {
     }
 
     if (readListSuccess) {
+      refetchUserData();
       toast.success("Added To Read List", { toastId: "successReadList" });
     }
     if (readListError) {
@@ -79,6 +83,7 @@ export default function BookCard({ book }: IProps) {
     readingListError,
     readListSuccess,
     readListError,
+    refetchUserData,
   ]);
 
   // Wish List Handler
