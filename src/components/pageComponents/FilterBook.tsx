@@ -2,7 +2,6 @@
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useGetBooksQuery } from "../../redux/feature/books/bookApi";
-import { useAppSelector } from "../../redux/hook";
 import BookSearchBar from "../ui/BookSearchBar";
 import FilterDropDown from "../ui/FilterDropDown";
 
@@ -18,11 +17,10 @@ type IFilterBook = {
 };
 
 export default function FilterBook({ filter }: IFilterBook) {
-  const { email } = useAppSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { data, isError, isSuccess, isLoading } = useGetBooksQuery({
+  const { data } = useGetBooksQuery({
     publicationYear: filter.publicationYear,
     genre: filter.genre,
     searchTerm: filter.searchTerm,

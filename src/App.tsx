@@ -9,17 +9,18 @@ function App() {
   const auth = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    if (auth.token && auth.user.email) {
+    if (auth.token && auth.user.email && auth.user.id) {
       dispatch(
         setUser({
           token: auth.token,
           user: {
             email: auth.user.email,
+            id: auth.user.id,
           },
         })
       );
     }
-  }, [auth.token, auth.user.email, dispatch]);
+  }, [auth.token, auth.user.email, auth.user.id, dispatch]);
 
   return (
     <div>
