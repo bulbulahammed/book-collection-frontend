@@ -40,7 +40,7 @@ export default function BookReview({ review }: IProps) {
   }, [deleteReview, isError, isSuccess]);
 
   return (
-    <div className="bg-accent text-white rounded-md p-6 mb-6 text-center max-w-5xl mx-auto hover:scale-[102%] transition-all duration-300">
+    <div className="h-full w-full bg-gray-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 p-6 mb-6 text-center max-w-5xl mx-auto hover:scale-[102%] transition-all duration-300">
       <div className="font-light text-sm mb-2">{review?.reviewer}</div>
       <div className="text-lg">{review?.comment}</div>
       <div

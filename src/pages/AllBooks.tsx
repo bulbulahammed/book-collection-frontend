@@ -27,8 +27,6 @@ export default function AllBooks() {
     setFilter(tempSearchParams);
   }, [location, searchParams]);
 
-  // Remove searchParams Dependency if face any problem
-
   // Get Filtered books query
   const { data, isError, isSuccess, isLoading } = useGetBooksQuery({
     publicationYear: filter.publicationYear,

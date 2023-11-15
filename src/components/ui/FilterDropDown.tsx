@@ -15,10 +15,9 @@ export default function FilterDropDown({
     <select
       className="select select-bordered w-full max-w-xs  outline-none hover:outline-none focus:outline-none"
       onChange={(e) => handleFilterValue(e.target.value)}
+      defaultValue={optionLabel}
     >
-      <option disabled selected>
-        {optionLabel}
-      </option>
+      <option disabled>{optionLabel}</option>
       {items?.map((item, index) => (
         <option key={index} value={item}>
           {item}
