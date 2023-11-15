@@ -25,7 +25,6 @@ const initialState: IAuthState = {
   isError: false,
   error: null,
 };
-
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -41,11 +40,16 @@ export const authSlice = createSlice({
       }>
     ) => {
       state.token = action.payload.token;
-      state.user.email = action.payload.user.email;
 
-      // Retrieve id from local storage and update the state
-      const storedId = localStorage.getItem("id");
-      state.user.id = storedId !== null ? storedId : null;
+      // Check if email is not null before assigning
+      if (action.payload.user.email !== null) {
+        state.user.email = action.payload.user.email;
+      }
+
+      // Check if id is not null before assigning
+      if (action.payload.user.id !== null) {
+        state.user.id = action.payload.user.id;
+      }
     },
     defaultState: (state) => {
       state.token = null;

@@ -36,25 +36,6 @@ export default function AllBooks() {
 
   const AllBook = data?.data;
 
-  let uniqueGenres: string[] = [];
-  let uniquePublicationYears: string[] = [];
-
-  // Check if AllBook is defined
-  if (AllBook) {
-    // Use a Set to store unique genres and publication years
-    const uniqueGenresSet = new Set();
-    const uniquePublicationYearsSet = new Set();
-
-    // Iterate through the books and add genres and publication years to their respective Sets
-    AllBook.forEach((book: { genre: string; publicationYear: string }) => {
-      uniqueGenresSet.add(book.genre);
-      uniquePublicationYearsSet.add(book.publicationYear);
-    });
-
-    // Convert the Sets back to arrays if needed and cast them to string[]
-    uniqueGenres = Array.from(uniqueGenresSet) as string[];
-    uniquePublicationYears = Array.from(uniquePublicationYearsSet) as string[];
-  }
   return (
     <section className="container mx-auto">
       <div>
