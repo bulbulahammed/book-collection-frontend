@@ -50,9 +50,6 @@ export default function Navbar() {
                 <li>
                   <Link to="/allBooks">All Books</Link>
                 </li>
-                <li>
-                  <Link to="/recentBooks">Recent Books</Link>
-                </li>
                 {email && (
                   <li>
                     <Link to="addBook">Add Book</Link>
@@ -90,9 +87,6 @@ export default function Navbar() {
               </li>
               <li>
                 <Link to="/allBooks">All Books</Link>
-              </li>
-              <li>
-                <Link to="/recentBooks">Recent Books</Link>
               </li>
               {email && (
                 <li>

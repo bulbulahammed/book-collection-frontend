@@ -7,7 +7,6 @@ import EditBook from "../pages/EditBook";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
-import RecentBooks from "../pages/RecentBooks";
 import Signup from "../pages/Signup";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
       {
         path: "/edit/:id",
         element: <EditBook />,
-      },
-      {
-        path: "/recentBooks",
-        element: <RecentBooks />,
       },
       {
         path: "/signup",
