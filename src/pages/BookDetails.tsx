@@ -7,6 +7,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { SlCalender } from "react-icons/sl";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import BookNotFound from "../components/pageComponents/BookNotFound";
 import InputReviews from "../components/pageComponents/InputReview";
 import BookReview from "../components/ui/BookReviews";
 import {
@@ -23,7 +24,6 @@ export default function BookDetails() {
   //Get Single Book
   const { data, isLoading, isError, isSuccess } = useGetSingleBooksQuery(id, {
     refetchOnMountOrArgChange: true,
-    pollingInterval: 1000,
   });
 
   const bookData = data?.data;
@@ -190,9 +190,7 @@ export default function BookDetails() {
           )}
         </div>
       ) : (
-        <div className="pt-20">
-          <p>Book Not Found</p>
-        </div>
+        !isLoading && !isSuccess && <BookNotFound />
       )}
     </section>
   );
