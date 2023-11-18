@@ -34,7 +34,7 @@ export default function AddBook() {
     }));
   };
 
-  const [addBook, { data, isLoading, isSuccess, isError }] =
+  const [addBook, { data, isLoading, isSuccess, isError, error }] =
     useAddBookMutation();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -43,7 +43,6 @@ export default function AddBook() {
   };
 
   const ToastMessage = data?.message;
-
   useEffect(() => {
     if (isSuccess) {
       toast.success(ToastMessage, { toastId: "AddBookSuccess" });
@@ -52,7 +51,12 @@ export default function AddBook() {
     if (isError) {
       toast.error(ToastMessage, { toastId: "AddBookError" });
     }
-  }, [isSuccess, isError, ToastMessage, navigate]);
+    if (error) {
+      toast.error("File Too Large/ Network Error", {
+        toastId: "AddBookErrors",
+      });
+    }
+  }, [isSuccess, isError, ToastMessage, navigate, error]);
 
   return (
     <section
