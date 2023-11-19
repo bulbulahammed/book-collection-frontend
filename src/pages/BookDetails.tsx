@@ -24,6 +24,7 @@ export default function BookDetails() {
   //Get Single Book
   const { data, isLoading, isError, isSuccess } = useGetSingleBooksQuery(id, {
     refetchOnMountOrArgChange: true,
+    pollingInterval: 1000,
   });
 
   const bookData = data?.data;
